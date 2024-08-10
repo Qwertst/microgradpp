@@ -10,10 +10,12 @@ namespace nn {
 class Value_handler;
 using Value = std::shared_ptr<Value_handler>;
 Value make_value(double data, std::vector<Value> childs = {});
+Value make_value();
 void backward(const Value &value);
 
 class Value_handler {
 public:
+    Value_handler();
     Value_handler(double data, std::vector<Value> childs);
     double get_data() const;
     double get_grad() const;

@@ -3,11 +3,25 @@
 #include <cmath>
 #include <iostream>
 #include <unordered_set>
+#include <random>
+
+namespace {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dist(0,1);
+}
 
 namespace nn {
 
 Value make_value(double data, std::vector<Value> childs) {
     return std::make_shared<Value_handler>(data, childs);
+}
+
+Value make_value() {
+    return std::make_shared<Value_handler>();
+}
+
+Value_handler::Value_handler(): data_(dist(gen)), grad_(0) {
 }
 
 Value_handler::Value_handler(double data, std::vector<Value> childs)
