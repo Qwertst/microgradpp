@@ -15,6 +15,9 @@ void backward(const Value& value);
 class Value_handler {
 public:
     Value_handler(double data, std::vector<Value> childs);
+    double get_data() const;
+    double get_grad() const;
+    void zero_grad();
 
     friend void backward(const Value& value);
     friend Value operator+(const Value& lhs, const Value &rhs);

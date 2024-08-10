@@ -12,6 +12,18 @@ namespace nn {
 
     Value_handler::Value_handler(double data, std::vector<Value> childs): data_(data), grad_(0), prev_(std::move(childs)) {};
 
+    double Value_handler::get_data() const {
+        return data_;
+    }
+
+    double Value_handler::get_grad() const {
+        return grad_;
+    }
+
+    void Value_handler::zero_grad() {
+        grad_ = 0;
+    }
+
     Value operator+(const Value& lhs, const Value& rhs) {
         Value res = make_value(lhs->data_ + rhs->data_, {lhs, rhs});
         Value_handler* weak_res = res.get();
