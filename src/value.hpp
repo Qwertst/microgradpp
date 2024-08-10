@@ -14,44 +14,47 @@ void backward(const Value &value);
 
 class Value_handler {
 public:
-  Value_handler(double data, std::vector<Value> childs);
-  double get_data() const;
-  double get_grad() const;
-  void zero_grad();
+    Value_handler(double data, std::vector<Value> childs);
+    double get_data() const;
+    double get_grad() const;
+    void zero_grad();
 
-  friend void backward(const Value &value);
-  friend Value operator+(const Value &lhs, const Value &rhs);
-  friend Value operator-(const Value &lhs, const Value &rhs);
-  friend Value operator*(const Value &lhs, const Value &rhs);
-  friend Value operator/(const Value &lhs, const Value &rhs);
+    friend void backward(const Value &value);
+    friend Value operator+(const Value &lhs, const Value &rhs);
+    friend Value operator-(const Value &lhs, const Value &rhs);
+    friend Value operator*(const Value &lhs, const Value &rhs);
+    friend Value operator/(const Value &lhs, const Value &rhs);
 
-  friend Value operator+(double lhs, const Value &rhs);
-  friend Value operator-(double lhs, const Value &rhs);
-  friend Value operator*(double lhs, const Value &rhs);
-  friend Value operator/(double lhs, const Value &rhs);
-  friend Value operator+(const Value &lhs, double rhs);
-  friend Value operator-(const Value &lhs, double rhs);
-  friend Value operator*(const Value &lhs, double rhs);
-  friend Value operator/(const Value &lhs, double rhs);
+    friend Value operator+(double lhs, const Value &rhs);
+    friend Value operator-(double lhs, const Value &rhs);
+    friend Value operator*(double lhs, const Value &rhs);
+    friend Value operator/(double lhs, const Value &rhs);
+    friend Value operator+(const Value &lhs, double rhs);
+    friend Value operator-(const Value &lhs, double rhs);
+    friend Value operator*(const Value &lhs, double rhs);
+    friend Value operator/(const Value &lhs, double rhs);
 
-  friend Value operator-(const Value &arg);
+    friend Value operator-(const Value &arg);
 
-  friend Value pow(const Value &arg, double k);
-  friend Value relu(const Value &arg);
-  friend Value exp(const Value &arg);
+    friend Value pow(const Value &arg, double k);
+    friend Value relu(const Value &arg);
+    friend Value exp(const Value &arg);
 
-  friend std::ostream &operator<<(std::ostream &os, const Value &value);
+    friend std::ostream &operator<<(std::ostream &os, const Value &value);
 
-  friend Value;
+    friend Value;
 
 private:
-  double data_;
-  double grad_;
-  std::vector<Value> prev_;
-  std::function<void()> backward_;
+    double data_;
+    double grad_;
+    std::vector<Value> prev_;
+    std::function<void()> backward_;
 
-  static void top_sort(const Value &value, std::unordered_set<Value> &visited,
-                       std::vector<Value> &order);
+    static void top_sort(
+        const Value &value,
+        std::unordered_set<Value> &visited,
+        std::vector<Value> &order
+    );
 };
 
-} // namespace nn
+}  // namespace nn
