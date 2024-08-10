@@ -1,13 +1,14 @@
 #pragma once
-#include "value.hpp"
 #include <vector>
+#include "value.hpp"
 
 namespace nn {
 
 class Neuron {
 public:
     Neuron(size_t in_size, bool bias = true, bool nonlin = true);
-    Value operator()(const std::vector<Value>& input) const;
+    Value operator()(const std::vector<Value> &input) const;
+
 private:
     std::vector<Value> weights_;
     Value bias_;
@@ -17,8 +18,14 @@ private:
 
 class Layer {
 public:
-    Layer(size_t in_size, size_t out_size, bool bias = true, bool nonlin = true);
-    std::vector<Value> operator()(const std::vector<Value>& input) const;
+    Layer(
+        size_t in_size,
+        size_t out_size,
+        bool bias = true,
+        bool nonlin = true
+    );
+    std::vector<Value> operator()(const std::vector<Value> &input) const;
+
 private:
     std::vector<Neuron> neurons_;
     size_t in_size_;
@@ -28,7 +35,8 @@ private:
 class MLP {
 public:
     MLP(size_t in_size, std::vector<size_t> out_sizes);
-    std::vector<Value> operator()(const std::vector<Value>& input) const;
+    std::vector<Value> operator()(const std::vector<Value> &input) const;
+
 private:
     std::vector<Layer> layers_;
     size_t in_size_;
@@ -36,4 +44,4 @@ private:
     size_t n_layers_;
 };
 
-} // namespace nn
+}  // namespace nn
