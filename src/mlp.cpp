@@ -22,7 +22,7 @@ Value Neuron::operator()(const std::vector<Value> &input) const {
     for (size_t it = 0; it < in_size_; ++it) {
         res = res + input[it] * weights_[it];
     }
-    return nonlin_ ? relu(res) : res;
+    return nonlin_ ? tanh(res) : res;
 }
 
 void Neuron::update(double lr) {
