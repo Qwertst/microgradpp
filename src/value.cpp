@@ -39,6 +39,14 @@ void Value_handler::zero_grad() {
     grad_ = 0;
 }
 
+void Value_handler::update(double lr) {
+    data_ -= lr * grad_;
+}
+
+void Value_handler::set_label(std::string label) {
+    label_ = std::move(label);
+}
+
 Value operator+(const Value &lhs, const Value &rhs) {
     Value res = make_value(lhs->data_ + rhs->data_, {lhs, rhs});
     Value_handler *weak_res = res.get();
@@ -81,6 +89,10 @@ Value relu(const Value &arg) {
     return res;
 }
 
+Value tanh(const Value &arg) {
+    return (exp(2 * arg) - 1) / (exp(2 * arg) + 1);
+}
+
 Value exp(const Value &arg) {
     Value res = make_value(std::exp(arg->data_), {arg});
     Value_handler *weak_res = res.get();
@@ -103,7 +115,11 @@ Value operator/(const Value &lhs, const Value &rhs) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Value &value) {
-    os << "(" << value->data_ << " | " << value->grad_ << ")\n";
+    os << "(" << value->data_ << " | " << value->grad_;
+    if (!value->label_.empty()) {
+        os << " | " << value->label_;
+    }
+    os << ")";
     return os;
 }
 
@@ -126,13 +142,13 @@ void Value_handler::top_sort(
     std::unordered_set<Value> &visited,
     std::vector<Value> &order
 ) {
-    if (visited.find(value) == visited.end()) {
-        visited.insert(value);
-        for (const Value &child : value->prev_) {
+    visited.insert(value);
+    for (const Value &child : value->prev_) {
+        if (visited.find(child) == visited.end()) {
             top_sort(child, visited, order);
         }
-        order.push_back(value);
     }
+    order.push_back(value);
 }
 
 Value operator+(double lhs, const Value &rhs) {

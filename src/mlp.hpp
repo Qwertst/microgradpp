@@ -8,6 +8,9 @@ class Neuron {
 public:
     Neuron(size_t in_size, bool bias = true, bool nonlin = true);
     Value operator()(const std::vector<Value> &input) const;
+    void update(double lr);
+    void zero_grad();
+    friend std::ostream &operator<<(std::ostream &os, const Neuron &neuron);
 
 private:
     std::vector<Value> weights_;
@@ -25,6 +28,9 @@ public:
         bool nonlin = true
     );
     std::vector<Value> operator()(const std::vector<Value> &input) const;
+    void update(double lr);
+    void zero_grad();
+    friend std::ostream &operator<<(std::ostream &os, const Layer &layer);
 
 private:
     std::vector<Neuron> neurons_;
@@ -36,6 +42,13 @@ class MLP {
 public:
     MLP(size_t in_size, std::vector<size_t> out_sizes);
     std::vector<Value> operator()(const std::vector<Value> &input) const;
+    std::vector<std::vector<Value>> operator()(
+        const std::vector<std::vector<Value>> &input
+    ) const;
+    void update(double lr);
+    void zero_grad();
+
+    friend std::ostream &operator<<(std::ostream &os, const MLP &mlp);
 
 private:
     std::vector<Layer> layers_;

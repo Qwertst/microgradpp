@@ -1,6 +1,9 @@
 #include <cmath>
-#include "value.hpp"
+#include "../src/value.hpp"
 #include "doctest.h"
+
+#include "../src/utils.hpp"
+#include <iostream>
 
 using namespace nn;
 

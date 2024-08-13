@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_FLAGS "-pedantic-errors -Wall -Wextra -Werror -Wshadow -g3 -fsanitize=address -fsanitize=undefined")
 
-add_executable(micropp src/main.cpp src/value.cpp)
-add_executable(micro_test tests/doctest_main.cpp tests/test_value.cpp src/value.cpp)
+add_executable(micropp src/main.cpp src/value.cpp src/mlp.cpp src/utils.cpp)
+add_executable(micro_test tests/doctest_main.cpp tests/test_value.cpp src/value.cpp src/mlp.cpp src/utils.cpp)
 
 target_include_directories(micro_test PRIVATE src)
