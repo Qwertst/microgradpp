@@ -90,7 +90,7 @@ Value relu(const Value &arg) {
 }
 
 Value tanh(const Value &arg) {
-    return (exp(2*arg)-1)/(exp(2*arg)+1);
+    return (exp(2 * arg) - 1) / (exp(2 * arg) + 1);
 }
 
 Value exp(const Value &arg) {
@@ -117,7 +117,7 @@ Value operator/(const Value &lhs, const Value &rhs) {
 std::ostream &operator<<(std::ostream &os, const Value &value) {
     os << "(" << value->data_ << " | " << value->grad_;
     if (!value->label_.empty()) {
-        os << " | " << value->label_; 
+        os << " | " << value->label_;
     }
     os << ")";
     return os;

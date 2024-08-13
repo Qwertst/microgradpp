@@ -8,8 +8,7 @@ Value MSE_loss(const std::vector<Value> &y, const std::vector<Value> &y_pred) {
     loss->set_label("mse");
     int n = static_cast<int>(y.size());
     for (int i = 0; i < n; ++i) {
-        loss = loss + pow((y[i]-y_pred[i]),2)
-        ;
+        loss = loss + pow((y[i] - y_pred[i]), 2);
     }
     loss = loss / n;
     return loss;

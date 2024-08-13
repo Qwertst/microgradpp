@@ -1,8 +1,8 @@
+#include "mlp.hpp"
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include "value.hpp"
-#include "mlp.hpp"
 
 namespace nn {
 
@@ -48,7 +48,6 @@ std::ostream &operator<<(std::ostream &os, const Neuron &neuron) {
     return os;
 }
 
-
 Layer::Layer(size_t in_size, size_t out_size, bool bias, bool nonlin)
     : in_size_(in_size), out_size_(out_size) {
     neurons_.reserve(out_size_);
@@ -79,7 +78,8 @@ void Layer::zero_grad() {
 }
 
 std::ostream &operator<<(std::ostream &os, const Layer &layer) {
-    os << "Layer(in: " << layer.in_size_ << ", out: " << layer.out_size_ << ")\n";
+    os << "Layer(in: " << layer.in_size_ << ", out: " << layer.out_size_
+       << ")\n";
     for (size_t i = 0; i < layer.out_size_; ++i) {
         os << "Neuron " << i << " : " << layer.neurons_[i] << '\n';
     }

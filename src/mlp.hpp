@@ -10,7 +10,7 @@ public:
     Value operator()(const std::vector<Value> &input) const;
     void update(double lr);
     void zero_grad();
-    friend std::ostream &operator<<(std::ostream &os, const Neuron &neuron);    
+    friend std::ostream &operator<<(std::ostream &os, const Neuron &neuron);
 
 private:
     std::vector<Value> weights_;
@@ -31,7 +31,6 @@ public:
     void update(double lr);
     void zero_grad();
     friend std::ostream &operator<<(std::ostream &os, const Layer &layer);
-
 
 private:
     std::vector<Neuron> neurons_;
